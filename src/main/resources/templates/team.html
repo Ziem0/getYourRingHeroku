@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: header"></head>
+<body>
+
+    <div th:replace="template :: nav"></div>
+
+    <div class="teamContainer">
+
+        <h2 class="season" th:text="'Official NBA ' + ${season} + ' season'"></h2>
+
+        <h3 class="tradeInfo" th:if="${tradeInfo} != null" th:text="${tradeInfo}">tradeInfo</h3>
+
+        <div class="options">
+            <div th:if="${tradesCounter}!=2">
+                <a href="/game/trade"><img th:src="@{/images/tradeBtn.png}" alt="btnTrade" title="trade player!"></a>
+            </div>
+            <a href="/game/table"><img th:src="@{/images/tableBtn.png}" alt="btnTable" title="check table!"></a>
+            <a class="ball" href="/game/matches"><img th:src="@{/images/matchBtn.png}" alt="btnMatch" title="play games!"></a>
+            <a href="/game/rings"><img th:src="@{/images/ringBtn.png}" alt="btnRings" title="check won rings!"></a>
+        </div>
+        <img class="cityPan" th:src="@{'/images/'+${cityPath}}">
+
+        <div class="squad">
+            <h3>Your actual squad:</h3>
+            <table>
+                <tr>
+                    <th>player</th>
+                    <th>overall</th>
+                    <th>contract</th>
+                </tr>
+                <tr th:each="player : ${players}">
+                    <th th:text="${player.getName()}">name</th>
+                    <th th:text="${player.getOverall()}">overall</th>
+                    <th th:text="${player.getContractValue()}">contract</th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="coach">
+            <h3>Your coach:</h3>
+            <tr>
+                <td th:text="${coach.getName()}"></td>
+            </tr>
+        </div>
+
+        <div class="teamInfo">
+            <h3>Team info:</h3>
+            <ul>
+                <li>City :</li>
+                    <ul>
+                        <li th:text="${city}"></li>
+                    </ul>
+                <li>Hall :</li>
+                <ul>
+                    <li th:text="${hall}"></li>
+                </ul>
+                <li>Wins :</li>
+                    <ul>
+                        <li th:text="${wins}"></li>
+                    </ul>
+                <li>+- :</li>
+                    <ul>
+                        <li th:text="${balance}"></li>
+                    </ul>
+            </ul>
+        </div>
+
+        <div class="nextRound">
+            <h>Next round matches:</h>
+            <tr th:each="match : ${matches}" th:object="${matches}">
+                <td th:text="${match.getTeamOne().getName()}">match</td>
+                <td>vs</td>
+                <td th:text="${match.getTeamTwo().getName()}">match</td>
+                <br>
+            </tr>
+        </div>
+
+        <div class="rules">
+            <a href="/game/intro">READ RULES</a>
+        </div>
+
+    </div>
+
+    <div th:replace="template :: foot"></div>
+
+</body>
+</html>

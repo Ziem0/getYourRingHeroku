@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: header"></head>
+<body>
+
+    <div th:replace="template :: nav"></div>
+
+    <div class="awardsContainer">
+
+        <div class="winners">
+            <h3 th:text="${second}">2nd</h3>
+            <h3 th:text="${winner}">winner</h3>
+            <h3 th:text="${third}">3rd</h3>
+        </div>
+
+        <img th:src="@{/images/podium.png}">
+
+        <img th:src="@{'https://nba-players.herokuapp.com/players/'+ ${lastName}+'/'+${firstName}}">
+
+        <table>
+            <tr>
+                <th>MVP</th>
+                <th>Team</th>
+                <th>Won battles last season</th>
+                <th>Won battles entire career</th>
+            </tr>
+            <tr>
+                <th th:text="${mvp.getName()}"></th>
+                <th th:text="${mvp.getTeam().getName()}"></th>
+                <th th:text="${mvp.getWonBattlesPerSeason()}"></th>
+                <th th:text="${mvp.getWonBattlesEntireCareer()}"></th>
+            </tr>
+        </table>
+
+        <div th:replace="template :: table"></div>
+
+        <h2>Boss comment:</h2>
+        <h2 th:text="${comment}"></h2>
+
+        <form method="post" action="#" th:action="@{/game/awards}">
+            <button type="submit">START NEXT SEASON</button>
+        </form>
+    </div>
+
+    <div th:replace="template :: foot"></div>
+
+</body>
+</html>

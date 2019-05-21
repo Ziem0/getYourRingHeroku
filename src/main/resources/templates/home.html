@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: header"></head>
+
+<body>
+
+        <div th:replace="template::welcomeNav"></div>
+
+
+        <div class="homeContainer">
+
+            <div th:if="${isSessionExpired} == true">
+                <a href="/create">register</a>
+            </div>
+
+            <div th:unless="${isSessionExpired} == true">
+                <form name="logoutForm" th:action="@{/logout}" method="post">
+                    <input type="submit" value="sign out"/>
+                </form>
+            </div>
+
+            <a href="/game">login</a>
+
+        </div>
+
+        <div th:replace="template :: footer"></div>
+
+</body>
+</html>
